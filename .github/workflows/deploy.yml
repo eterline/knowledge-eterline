@@ -8,8 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      IMAGE_NAME: knowledge-eterline
 
 
     steps:
@@ -21,12 +19,12 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t $IMAGE_NAME:latest .
+          docker build -t knowledge-eterline:latest .
 
       - name: Save Docker image to archive
         run: |
           mkdir -p deploy
-          docker save $IMAGE_NAME:latest | gzip > ./deploy/$IMAGE_NAME.tar.gz
+          docker save knowledge-eterline:latest | gzip > ./deploy/knowledge-eterline.tar.gz
 
       - name: Copy image to server image store folder
         uses: appleboy/scp-action@v0.1.7
@@ -34,7 +32,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./deploy/${{ env.IMAGE_NAME }}.tar.gz"
+          source: "./deploy/knowledge-eterline.tar.gz"
           target: "~/deploy/"
 
       - name: Deploy on server and run service
@@ -44,7 +42,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker load -i ~/deploy/${{ env.IMAGE_NAME }}.tar.gz
+            docker load -i ~/deploy/knowledge-eterline.tar.gz
             cd ~/compose-files/production
             docker compose down || true
             docker compose up -d --force-recreate
