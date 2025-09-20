@@ -34,7 +34,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./deploy/$IMAGE_NAME.tar.gz"
+          source: "./deploy/${{ env.IMAGE_NAME }}.tar.gz"
           target: "~/deploy/"
 
       - name: Deploy on server and run service
@@ -44,7 +44,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker load -i ~/deploy/$IMAGE_NAME.tar.gz
+            docker load -i ~/deploy/${{ env.IMAGE_NAME }}.tar.gz
 #           rm -rf ~/deploy/* || true
             cd ~/compose-files/production
             docker compose down || true
