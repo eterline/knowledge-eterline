@@ -43,6 +43,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             docker load -i ~/deploy/knowledge-eterline.tar.gz
+            rm -rf ~/deploy/knowledge-eterline.tar.gz
             cd ~/compose-files/production
             docker compose down || true
-            docker compose up -d --force-recreate
+            docker compose up -d
+            sleep 5
+            docker restart traefik || true

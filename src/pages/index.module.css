@@ -3,6 +3,18 @@
  * and scoped locally.
  */
 
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered_header {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .heroBanner {
     padding: 4rem 0;
     text-align: center;
@@ -17,6 +29,16 @@
     .heroBanner {
         padding: 15px;
     }
+}
+
+.title_head {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: .4rem;
+    border-radius: 15px;
 }
 
 .buttons {
