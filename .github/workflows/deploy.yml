@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: ${{ github.event.repository.name }}
+      IMAGE_NAME: knowledge-eterline
 
 
     steps:
