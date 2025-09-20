@@ -45,7 +45,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             docker load -i ~/deploy/${{ env.IMAGE_NAME }}.tar.gz
-#           rm -rf ~/deploy/* || true
             cd ~/compose-files/production
             docker compose down || true
             docker compose up -d --force-recreate
