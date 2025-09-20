@@ -34,6 +34,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "./deploy/knowledge-eterline.tar.gz"
           target: "~/deploy/"
+          tar: false
 
       - name: Deploy on server and run service
         uses: appleboy/ssh-action@v1.1.0
